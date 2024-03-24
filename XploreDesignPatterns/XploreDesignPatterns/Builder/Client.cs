@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,12 +7,23 @@ using static XploreDesignPatterns.Builder.Client;
 
 namespace XploreDesignPatterns.Builder {
     internal class Client {
-        public void Main(String[] args) {
+        public static void TypingConsole(string msg) {
+            foreach (char c in msg) {
+                Console.Write(c);
+                Thread.Sleep(10);
+            }
+            Console.WriteLine();
+        }
+
+        public static void Main(String[] args) {
             Beverage beverage;
             BeverageDirector beverageDirector = new BeverageDirector();
             TeaBuilder tea = new TeaBuilder();
+            CoffeeBuilder coffee = new CoffeeBuilder();
             beverage = beverageDirector.MakeBeverage(tea);
-            Console.WriteLine(beverage.ShowBeverage());
+            TypingConsole(beverage.ShowBeverage());
+            beverage = beverageDirector.MakeBeverage(coffee);
+            TypingConsole(beverage.ShowBeverage());
 
         }
         public class BeverageDirector {
@@ -56,46 +67,46 @@ namespace XploreDesignPatterns.Builder {
 
         public class CoffeeBuilder : BeverageBuilder {
             public override void SetWater() {
-                Console.WriteLine("Step 1 : Boiling water");
+                TypingConsole("Step 1 : Boiling water");
                 GetBeverage().Water = 40;
             }
             public override void SetMilk() {
-                Console.WriteLine("Step 2 : Adding milk");
+                TypingConsole("Step 2 : Adding milk");
                 GetBeverage().Milk = 50;
             }
             public override void SetSugar() {
-                Console.WriteLine("Step 3 : Adding Sugar");
+                TypingConsole("Step 3 : Adding Sugar");
                 GetBeverage().Sugar = 10;
             }
             public override void SetPowderQuantity() {
-                Console.WriteLine("Step 4 : Adding 15 Grams of coffee powder");
+                TypingConsole("Step 4 : Adding 15 Grams of coffee powder");
                 GetBeverage().PowderQuantity = 15;
             }
             public override void SetBeverageType() {
-                Console.WriteLine("Coffee");
+                TypingConsole("Coffee");
                 GetBeverage().BeverageName = "Coffee";
             }
         }
 
         public class TeaBuilder : BeverageBuilder {
             public override void SetWater() {
-                Console.WriteLine("Step 1 : Boiling water");
+                TypingConsole("Step 1 : Boiling water");
                 GetBeverage().Water = 40;
             }
             public override void SetMilk() {
-                Console.WriteLine("Step 2 : Adding milk");
+                TypingConsole("Step 2 : Adding milk");
                 GetBeverage().Milk = 50;
             }
             public override void SetSugar() {
-                Console.WriteLine("Step 3 : Adding Sugar");
+                TypingConsole("Step 3 : Adding Sugar");
                 GetBeverage().Sugar = 10;
             }
             public override void SetPowderQuantity() {
-                Console.WriteLine("Step 4 : Adding 15 Grams of tea powder");
+                TypingConsole("Step 4 : Adding 15 Grams of tea powder");
                 GetBeverage().PowderQuantity = 15;
             }
             public override void SetBeverageType() {
-                Console.WriteLine("Tea");
+                TypingConsole("Tea");
                 GetBeverage().BeverageName = "Tea";
             }
         }
